@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Launcher</title>
+    <script type="text/javascript" src="/eel.js"></script>
+  </head>
+
+  <body>
+    <h1>Basic Launcher</h1>
+    <div id="main-container"></div>
+    <script>
+      let mainContainer = document.getElementById("main-container");
+      eel.get_games()(function (games) {
+        console.log(games);
+        for (game of games) {
+          let card = document.createElement("div");
+          let text = document.createElement("p");
+          text.innerText = game["name"];
+          card.appendChild(text);
+          mainContainer.appendChild(card);
+        }
+      });
+    </script>
+  </body>
+</html>
