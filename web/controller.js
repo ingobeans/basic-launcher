@@ -93,12 +93,22 @@ function keepSelectionInBounds() {
   }
 }
 
+function scrollGameIntoView() {
+  let cards = document.getElementsByClassName("game-card");
+  cards[selectionIndex].scrollIntoView({
+    behavior: "smooth",
+    block: "nearest", // make sure it scrolls only the amount needed
+    inline: "nearest",
+  });
+}
+
 function moveLeft() {
   if (startSelection()) {
     return;
   }
   selectionIndex -= 1;
   keepSelectionInBounds();
+  scrollGameIntoView();
 }
 function moveRight() {
   if (startSelection()) {
@@ -106,18 +116,31 @@ function moveRight() {
   }
   selectionIndex += 1;
   keepSelectionInBounds();
+  scrollGameIntoView();
 }
 function moveUp() {
   if (startSelection()) {
     return;
   }
   selectionIndex -= calculateHorizontalCardsCapacity();
-  keepSelectionInBounds();
+
+  // moving up / down shouldn't have the same wrap around behaviour as moving left / right
+  // instead, it should, if under/overflown, move to the first/last game
+  if (selectionIndex < 0) {
+    selectionIndex = 0;
+  }
+  scrollGameIntoView();
 }
 function moveDown() {
   if (startSelection()) {
     return;
   }
   selectionIndex += calculateHorizontalCardsCapacity();
-  keepSelectionInBounds();
+
+  // moving up / down shouldn't have the same wrap around behaviour as moving left / right
+  // instead, it should, if under/overflown, move to the first/last game
+  if (selectionIndex >= games.length) {
+    selectionIndex = games.length - 1;
+  }
+  scrollGameIntoView();
 }
