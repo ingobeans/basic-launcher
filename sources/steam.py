@@ -41,6 +41,17 @@ class Steam(source.Source):
             return None
         
         return path
+    
+    def get_game_illustraton_path(self, game_id):
+        path = self.get_path()
+        if not path:
+            return []
+        
+        library_path = os.path.join(path, "appcache", "librarycache")
+        illustration_path = os.path.join(library_path, f"{game_id}_library_600x900.jpg")
+        if os.path.isfile(illustration_path):
+            return illustration_path
+        return None
 
     def get_games(self):
         path = self.get_path()
@@ -58,5 +69,7 @@ class Steam(source.Source):
             # load the (vdf formatted) manifests 
             with open(os.path.join(apps_path, manifest), "r", encoding="utf-8") as f:
                 data = vdf.load(f)["AppState"]
-            games.append(game.Game(self, data["name"], data["appid"]))
+            
+            g = game.Game(self, data["name"], data["appid"], self.get_game_illustraton_path(data["appid"]))
+            games.append(g)
         return games
