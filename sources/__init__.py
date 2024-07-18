@@ -13,7 +13,7 @@ sources = [source_steam]
 def get_games():
     games = []
     for s in sources:
-        if not s.name in config.active_config["disabled sources"]:
+        if not s.name in config.active_config["disabled sources"] and s.installed:
             for g in s.get_games():
                 games.append(game.Game(g, s))
     return games
