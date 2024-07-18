@@ -3,6 +3,11 @@ from . import source
 
 class Steam(source.Source):
     name:str = "steam"
+
+    def valid_path(self, path):
+        valid = os.path.isdir(path) and os.path.isdir(os.path.join(path, "steamapps"))
+        return valid
+
     def get_default_path(self):
         system = config.get_system()
         if system == "Windows":
@@ -22,7 +27,7 @@ class Steam(source.Source):
         else:
             path = self.get_default_path()
         
-        if not os.path.isdir(path) or not os.path.isdir(os.path.join(path, "steamapps")):
+        if not self.valid_path(path):
             self.installed = False
             return None
         
