@@ -15,5 +15,5 @@ def get_games():
     for s in sources:
         if not s.name in config.active_config["disabled sources"] and s.installed:
             for g in s.get_games():
-                games.append(game.Game(g, s))
+                games.append(g)
     return games

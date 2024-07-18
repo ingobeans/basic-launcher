@@ -1,5 +1,6 @@
-import config, os
+import config, os, vdf
 from . import source
+from . import game
 
 class Steam(source.Source):
     name:str = "steam"
@@ -7,6 +8,14 @@ class Steam(source.Source):
     def valid_path(self, path):
         valid = os.path.isdir(path) and os.path.isdir(os.path.join(path, "steamapps"))
         return valid
+    
+    def game_exists(self, name):
+        path = self.get_path()
+        if not path:
+            return []
+        
+        apps = os.path.join(path, "steamapps", "common")
+        return name in os.listdir(apps)
 
     def get_default_path(self):
         system = config.get_system()
@@ -38,7 +47,16 @@ class Steam(source.Source):
         if not path:
             return []
         
-        apps = os.path.join(path, "steamapps", "common")
-        games = os.listdir(apps)
-        filtered_games = filter(lambda x: not x in self.disabled_games, games)
-        return filtered_games
+        apps_path = os.path.join(path, "steamapps")
+        games = []
+
+        # load all steam app manifests
+        files = os.listdir(apps_path)
+        filtered_files = [x for x in files if x.startswith("appmanifest_")]
+        
+        for manifest in filtered_files:
+            # load the (vdf formatted) manifests 
+            with open(os.path.join(apps_path, manifest), "r", encoding="utf-8") as f:
+                data = vdf.load(f)["AppState"]
+            games.append(game.Game(self, data["name"], data["appid"]))
+        return games
