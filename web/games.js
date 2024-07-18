@@ -1,9 +1,8 @@
-let gamesAmount = 0;
+let games = [];
 let mainContainer = document.getElementById("main-container");
 
-eel.get_games()(function (games) {
-  console.log(games);
-  gamesAmount = games.length;
+eel.get_games()(function (value) {
+  games = value;
   for (game of games) {
     let card = document.createElement("div");
     let text = document.createElement("p");
