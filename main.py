@@ -24,4 +24,4 @@ def get_games():
     load_illustrations(games)
     return [game_to_dict(g) for g in games]
 
-eel.start('hello.html', port=5000)
+eel.start('hello.html', port=5048)
