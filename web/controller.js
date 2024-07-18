@@ -20,6 +20,10 @@ window.addEventListener("gamepadconnected", (event) => {
   monitorGamepad(event.gamepad.index);
 });
 
+window.addEventListener("mousedown", function (event) {
+  selectionIndex = null;
+});
+
 function handleAxesMovement(axes, previousAxesState) {
   // left/right
   if (axes[0] <= -axesThreshold && previousAxesState[0] > -axesThreshold) {
