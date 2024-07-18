@@ -4,6 +4,20 @@ body {
     margin: 0;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0); 
+}
+::-webkit-scrollbar-thumb {
+    background: #292929; 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #454545; 
+}
+
 #main-container {
     display: flex;
     flex-wrap: wrap;
