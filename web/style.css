@@ -39,6 +39,7 @@ body {
     position: relative;
     border-radius: 10px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .game-card p {

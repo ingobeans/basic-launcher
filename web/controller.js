@@ -1,14 +1,87 @@
 let axesThreshold = 0.8;
 let selectionIndex = null;
+let storedControllerMap = localStorage.getItem("controllerMap");
+if (storedControllerMap === null) {
+  localStorage.setItem(
+    "controllerMap",
+    JSON.stringify({
+      left: null,
+      right: null,
+      up: null,
+      down: null,
+      select: null,
+    })
+  );
+}
+let controllerMap = JSON.parse(localStorage.getItem("controllerMap"));
 
 window.addEventListener("gamepadconnected", (event) => {
   console.log("Gamepad connected:", event.gamepad);
   monitorGamepad(event.gamepad.index);
 });
 
-function monitorGamepad(index) {
-  const axesThreshold = 0.5; // Adjust this threshold as needed
+function handleAxesMovement(axes, previousAxesState) {
+  // left/right
+  if (axes[0] <= -axesThreshold && previousAxesState[0] > -axesThreshold) {
+    moveLeft();
+  } else if (axes[0] >= axesThreshold && previousAxesState[0] < axesThreshold) {
+    moveRight();
+  }
+  previousAxesState[0] = axes[0];
 
+  // up/down
+  if (axes[1] <= -axesThreshold && previousAxesState[1] > -axesThreshold) {
+    moveUp();
+  } else if (axes[1] >= axesThreshold && previousAxesState[1] < axesThreshold) {
+    moveDown();
+  }
+  previousAxesState[1] = axes[1];
+}
+
+function clickGame(gameElement) {
+  let index = 0;
+  for (gameCard of document.getElementsByClassName("game-card")) {
+    if (gameCard == gameElement) {
+      break;
+    }
+    index += 1;
+  }
+  selectGame(index);
+}
+
+function handleButtons(buttons, previousButtonStates) {
+  buttons.forEach((button, i) => {
+    // only care about the button if it is mapped to an action
+    console.log();
+    if (Object.values(controllerMap).includes(i)) {
+      if (button.pressed === true && previousButtonStates[i] !== true) {
+        if (controllerMap["left"] == i) {
+          moveLeft();
+        }
+        if (controllerMap["right"] == i) {
+          moveRight();
+        }
+        if (controllerMap["up"] == i) {
+          moveUp();
+        }
+        if (controllerMap["down"] == i) {
+          moveDown();
+        }
+        if (controllerMap["select"] == i) {
+          selectGame(selectionIndex);
+        }
+      }
+      previousButtonStates[i] = button.pressed;
+    }
+  });
+}
+
+function selectGame(gameIndex) {
+  console.log("launch game ", gameIndex);
+}
+
+function monitorGamepad(index) {
+  let previousButtonStates = {};
   let previousAxesState = {
     0: 0,
     1: 0,
@@ -19,33 +92,8 @@ function monitorGamepad(index) {
     const gamepad = gamepads[index];
 
     if (gamepad) {
-      // Check axis 0 (left-right movement)
-      if (
-        gamepad.axes[0] <= -axesThreshold &&
-        previousAxesState[0] > -axesThreshold
-      ) {
-        moveLeft();
-      } else if (
-        gamepad.axes[0] >= axesThreshold &&
-        previousAxesState[0] < axesThreshold
-      ) {
-        moveRight();
-      }
-      previousAxesState[0] = gamepad.axes[0];
-
-      // Check axis 1 (up-down movement)
-      if (
-        gamepad.axes[1] <= -axesThreshold &&
-        previousAxesState[1] > -axesThreshold
-      ) {
-        moveUp();
-      } else if (
-        gamepad.axes[1] >= axesThreshold &&
-        previousAxesState[1] < axesThreshold
-      ) {
-        moveDown();
-      }
-      previousAxesState[1] = gamepad.axes[1];
+      handleButtons(gamepad.buttons, previousButtonStates);
+      handleAxesMovement(gamepad.axes, previousAxesState);
     }
 
     refreshHighlightedSelection();
