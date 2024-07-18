@@ -17,7 +17,11 @@
           let card = document.createElement("div");
           let text = document.createElement("p");
           card.classList.add("game-card");
-          card.style.backgroundImage = `url("illustrations/${game["id"]}.jpg")`;
+          if (game["illustration"] !== undefined) {
+            let img = document.createElement("img");
+            img.src = game["illustration"];
+            card.appendChild(img);
+          }
           text.innerText = game["name"];
           card.appendChild(text);
           mainContainer.appendChild(card);

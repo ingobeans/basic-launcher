@@ -10,8 +10,27 @@ body {
 .game-card {
     background-color: #292929;
     width: 150px;
-    height: 230px;
+    height: calc(225px + 2em);
     margin-right: 15px;
-    padding: 10px;
     text-align: center;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.game-card p {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: calc(225px + 0.5em);
+    margin: 0;
+}
+
+.game-card img {
+    position: absolute;
+    width: 150px;
+    height: 225px;
+    top: 0;
+    left: 0;
 }

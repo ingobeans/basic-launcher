@@ -16,7 +16,7 @@ def load_illustrations(games):
             shutil.copy(game.illustration_path, os.path.join(loaded_illustrations_path, filename))
 
 def game_to_dict(game):
-    return {"name":game.name, "source":game.parent_source.name, "id":game.id, "illustration":(f"{game.id}.jpg" if game.illustration_path else None)}
+    return {"name":game.name, "source":game.parent_source.name, "id":game.id, "illustration":(f"illustrations/{game.id}.jpg" if game.illustration_path else None)}
 
 @eel.expose
 def get_games():
