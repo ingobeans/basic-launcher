@@ -5,6 +5,7 @@ body {
 
 #main-container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .game-card {
@@ -12,6 +13,7 @@ body {
     width: 150px;
     height: calc(225px + 2em);
     margin-right: 15px;
+    margin-bottom: 15px;
     text-align: center;
     position: relative;
     border-radius: 10px;
