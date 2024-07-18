@@ -1,4 +1,4 @@
-import os, config
+import config
 from . import source
 from . import game
 from . import steam
@@ -9,9 +9,6 @@ def load_source(source_class):
 source_steam = load_source(steam.Steam)
 
 sources = [source_steam]
-
-def is_windows():
-    return os.name == "nt"
 
 def get_games():
     games = []

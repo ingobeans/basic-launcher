@@ -2,6 +2,7 @@ class Source:
     name:str
     path:str
     disabled_games:list[str]
+    installed:bool
     def __init__(self, path, disabled_games) -> None:
         self.path = path
         self.disabled_games = disabled_games

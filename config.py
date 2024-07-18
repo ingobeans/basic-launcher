@@ -1,8 +1,10 @@
 import platform, os, json
 
+def get_system():
+    return platform.system()
+
 def get_app_data_directory():
-    system = platform.system()
-    
+    system = get_system()
     if system == "Windows":
         app_data_dir = os.getenv('APPDATA')
     elif system == "Darwin":
@@ -19,7 +21,7 @@ def get_default_config():
         "source settings": {
             "steam":{
                 "path":None, # None means default path for the system
-                "disabled games":[]
+                "disabled games":["Steam Controller Configs"] # games that aren't shown
             }
         }
     }
