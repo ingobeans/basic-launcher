@@ -56,9 +56,13 @@ function monitorGamepad(index) {
   checkGamepad();
 }
 
-function calculateHorizontalCardsCapacity() {}
+function calculateHorizontalCardsCapacity() {
+  return Math.trunc(mainContainer.clientWidth / (150 + 15));
+}
 
 function refreshHighlightedSelection() {
+  //document.getElementById("header").innerText =
+  //  calculateHorizontalCardsCapacity();
   let cards = document.getElementsByClassName("game-card");
   let index = 0;
   for (card of cards) {
@@ -109,13 +113,13 @@ function moveUp() {
   if (startSelection()) {
     return;
   }
-  selectionIndex += 1;
+  selectionIndex -= calculateHorizontalCardsCapacity();
   keepSelectionInBounds();
 }
 function moveDown() {
   if (startSelection()) {
     return;
   }
-  selectionIndex += 1;
+  selectionIndex += calculateHorizontalCardsCapacity();
   keepSelectionInBounds();
 }
