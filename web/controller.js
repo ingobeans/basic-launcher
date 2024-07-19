@@ -24,6 +24,31 @@ window.addEventListener("mousedown", function (event) {
   selectionIndex = null;
 });
 
+window.addEventListener("keydown", handleKeypress);
+
+function handleKeypress(event) {
+  switch (event.key) {
+    case "ArrowLeft":
+      moveLeft();
+      break;
+    case "ArrowRight":
+      moveRight();
+      break;
+    case "ArrowUp":
+      moveUp();
+      break;
+    case "ArrowDown":
+      moveDown();
+      break;
+    case "Enter":
+      selectGame(selectionIndex);
+      break;
+
+    default:
+      break;
+  }
+}
+
 function handleAxesMovement(axes, previousAxesState) {
   // left/right
   if (axes[0] <= -axesThreshold && previousAxesState[0] > -axesThreshold) {
@@ -56,7 +81,6 @@ function clickGame(gameElement) {
 function handleButtons(buttons, previousButtonStates) {
   buttons.forEach((button, i) => {
     // only care about the button if it is mapped to an action
-    console.log();
     if (Object.values(controllerMap).includes(i)) {
       if (button.pressed === true && previousButtonStates[i] !== true) {
         if (controllerMap["left"] == i) {
@@ -100,13 +124,19 @@ function monitorGamepad(index) {
       handleAxesMovement(gamepad.axes, previousAxesState);
     }
 
-    refreshHighlightedSelection();
-
     requestAnimationFrame(checkGamepad);
   }
 
   checkGamepad();
 }
+
+function renderSelectionUpdate() {
+  refreshHighlightedSelection();
+
+  requestAnimationFrame(renderSelectionUpdate);
+}
+
+renderSelectionUpdate();
 
 function calculateHorizontalCardsCapacity() {
   return Math.trunc(mainContainer.getBoundingClientRect().width / (150 + 15));
