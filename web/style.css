@@ -26,6 +26,85 @@ body {
     background: #454545; 
 }
 
+button {
+    width: fit-content;
+    
+    padding: 10px;
+    font-size:inherit;
+    color: inherit;
+    background-color: var(--contrast-color);
+    border-style: none;
+    border-radius: 10px;
+}
+
+#settings-container {
+    
+    display: flex;
+    flex-direction: column;
+}
+
+#settings-box {
+    position: absolute;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 700px;
+    height: fit-content;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 50;
+    padding: 10px;
+}
+
+#settings-box h1 {
+    margin: 0;
+    text-align: center;
+}
+#settings-box h2 {
+    padding: 0;
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#settings-box button {
+    margin-bottom: 10px;
+}
+
+.toggle-button-pair {
+    display: flex;
+}
+
+.toggle-button-pair button {
+    margin: 0;
+}
+
+.toggle-button-pair p {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+}
+
+.toggle-button-pair > button:first-of-type {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-right: 2px;
+}
+
+.toggle-button-pair > button:nth-of-type(2) {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 49;
+}
+
 #library-container {
     display: flex;
     flex-wrap: wrap;
