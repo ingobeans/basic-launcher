@@ -1,6 +1,8 @@
 import eel, sources, shutil, os
 eel.init('web')
 
+games = []
+
 loaded_illustrations_path = os.path.join("web","illustrations")
 loaded_illustrations = os.listdir(loaded_illustrations_path)
 
@@ -19,7 +21,14 @@ def game_to_dict(game):
     return {"name":game.name, "source":game.parent_source.name, "id":game.id, "illustration":(f"illustrations/{game.id}.jpg" if game.illustration_path else None)}
 
 @eel.expose
+def run_game(id):
+    print(id)
+    game = [g for g in games if g.id == str(id)][0]
+    game.parent_source.run_game(id)
+
+@eel.expose
 def get_games():
+    global games
     games = sources.get_games()
     load_illustrations(games)
     return [game_to_dict(g) for g in games]

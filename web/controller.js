@@ -105,6 +105,7 @@ function handleButtons(buttons, previousButtonStates) {
 }
 
 function selectGame(gameIndex) {
+  eel.run_game(games[gameIndex]["id"]);
   console.log("launch game ", gameIndex);
 }
 

@@ -1,4 +1,4 @@
-import config, os, vdf
+import config, os, vdf, subprocess
 from . import source
 from . import game
 
@@ -73,3 +73,13 @@ class Steam(source.Source):
             g = game.Game(self, data["name"], data["appid"], self.get_game_illustraton_path(data["appid"]))
             games.append(g)
         return games
+    
+    def run_game(self,id):
+        system = config.get_system()
+        if system == "Windows":
+            command = ["start", f"steam://rungameid/{id}"]
+        elif system == "Darwin":
+            command = ["open", f"steam://rungameid/{id}"]
+        else:
+            command = ["steam", f"steam://rungameid/{id}"]
+        subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
