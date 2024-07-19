@@ -1,5 +1,5 @@
 let games = [];
-let mainContainer = document.getElementById("main-container");
+let libraryContainer = document.getElementById("library-container");
 
 eel.get_games()(function (value) {
   games = value;
@@ -19,7 +19,7 @@ eel.get_games()(function (value) {
     }
     text.innerText = game["name"];
     card.appendChild(text);
-    mainContainer.appendChild(card);
+    libraryContainer.appendChild(card);
     index += 1;
   }
 });

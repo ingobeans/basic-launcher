@@ -139,7 +139,9 @@ function renderSelectionUpdate() {
 renderSelectionUpdate();
 
 function calculateHorizontalCardsCapacity() {
-  return Math.trunc(mainContainer.getBoundingClientRect().width / (150 + 15));
+  return Math.trunc(
+    libraryContainer.getBoundingClientRect().width / (150 + 15)
+  );
 }
 
 function refreshHighlightedSelection() {
