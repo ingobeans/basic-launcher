@@ -8,7 +8,7 @@ eel.get_games()(function (value) {
     let card = document.createElement("div");
     let text = document.createElement("p");
     card.classList.add("game-card");
-    console.log(index);
+
     card.onclick = function () {
       clickGame(this);
     };

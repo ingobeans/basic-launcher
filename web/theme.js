@@ -1,24 +1,19 @@
 let themes = {
-  light: {
-    "--background-color": "#f2f2f2",
-    "--text-color": "#000",
-    "--contrast-color": "#ffffff",
-    "--highlight-color": "#292929",
-  },
-  dark: {
-    "--background-color": "#000000",
-    "--text-color": "#ffffff",
-    "--contrast-color": "#292929",
-    "--highlight-color": "#ffffff",
-  },
+  light: `
+  --background-color: #f2f2f2;
+  --text-color: #000;
+  --contrast-color: #ffffff;
+  --highlight-color: #292929;`,
+
+  dark: `
+    --background-color: #19191b;
+    --text-color: #ffffff;
+    --contrast-color: #3d3d43;
+    --highlight-color: #ffffff;`,
 };
 
 function loadTheme(theme) {
-  for (const variable in theme) {
-    if (theme.hasOwnProperty(variable)) {
-      document.documentElement.style.setProperty(variable, theme[variable]);
-    }
-  }
+  document.documentElement.style.cssText = theme;
 }
 
 function updateThemeToSystem() {
