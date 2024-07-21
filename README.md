@@ -1,7 +1,19 @@
-# basic-launcher
+# Basic Launcher
 
-# Running
+### Setup instructions
 
-1. (optional) Set up virtual environment. This makes building easier. `python3 -m venv venv`
-2. Install packages. `pip install eel pyinstaller vdf json_repair`
-3. Run main. `python3 main.py`
+1. **(Optional) Set up virtual environment. This makes building easier.**
+
+   - Ubuntu: `python3 -m venv venv`
+   - Windows: `python -m venv venv`
+
+2. **(Optional) Load the venv.**
+
+   - Ubuntu: `source venv/bin/activate`
+   - Windows: `.\venv\Scripts\activate`
+
+3. **Install packages.** `pip install -r requirements.txt`
+
+4. **Run main.**
+   - Ubuntu: `python3 main.py`
+   - Windows: `python main.py`
