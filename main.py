@@ -3,28 +3,18 @@ eel.init('web')
 
 games = []
 
-loaded_illustrations = os.listdir(config.get_illustrations_path())
-
-def load_illustrations(games):
-    # create local web accesible copy of all game illustrations
-
-    for game in games:
-        if not game.illustration_path:
-            continue
-        
-        filename = f"{game.id}.jpg"
-        if not filename in loaded_illustrations:
-            shutil.copy(game.illustration_path, os.path.join(config.get_illustrations_path(), filename))
-
 def game_to_dict(game):
-    return {"name":game.name, "source":game.parent_source.name, "id":game.id, "illustration":(f"illustrations/{game.id}.jpg" if game.illustration_path else None)}
+    return {"name":game.name, "source":game.parent_source.name, "id":game.id, "illustration": game.illustration_path != None}
 
 @eel.expose
 def get_illustration_data(game_id):
-    path = os.path.join(config.get_illustrations_path(), f"{game_id}.jpg")
+    game = [g for g in games if g.id == str(game_id)][0]
+    path = game.illustration_path
     if os.path.isfile(path):
         with open(path, "rb") as f:
             data = f.read()
+    else:
+        return None
     
     base64_data = base64.b64encode(data).decode('utf-8')
     return f"data:image/jpeg;base64,{base64_data}"
@@ -43,7 +33,6 @@ def run_game(id):
 def get_games():
     global games
     games = sources.get_games()
-    load_illustrations(games)
     return [game_to_dict(g) for g in games]
 
 eel.start('hello.html', port=5048)

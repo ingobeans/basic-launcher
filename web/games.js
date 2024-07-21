@@ -12,7 +12,7 @@ eel.get_games()(function (value) {
     card.onclick = function () {
       clickGame(this);
     };
-    if (game["illustration"] !== undefined) {
+    if (game["illustration"] === true) {
       let img = document.createElement("img");
       eel.get_illustration_data(game["id"])(function (value) {
         img.src = value;

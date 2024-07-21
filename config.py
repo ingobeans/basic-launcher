@@ -42,12 +42,8 @@ def load_config():
     with open(os.path.join(get_app_data_directory(), "settings.json"), "r", encoding="utf-8") as f:
         return json.load(f)
 
-def get_illustrations_path():
-    return os.path.join(get_app_data_directory(), "illustrations")
-
 if not os.path.exists(get_app_data_directory()):
     os.mkdir(get_app_data_directory())
-    os.mkdir(get_illustrations_path())
     active_config = get_default_config()
     save_config()
     print(f"created {get_app_data_directory()}")
