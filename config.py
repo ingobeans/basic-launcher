@@ -21,7 +21,7 @@ def get_default_config():
         "source settings": {
             "steam":{
                 "path":None, # None means default path for the system
-                "disabled games":["Steam Controller Configs"] # games that aren't shown
+                "disabled games":[] # games that aren't shown
             }
         },
 
