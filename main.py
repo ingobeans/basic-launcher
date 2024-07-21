@@ -1,4 +1,4 @@
-import eel, sources, shutil, os, config, base64
+import eel, sources, os, config, base64
 eel.init('web')
 
 games = []
