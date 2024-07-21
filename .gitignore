@@ -153,3 +153,4 @@ cython_debug/
 
 web/illustrations/*
 !web/illustrations/.gitkeep
+settings.json
