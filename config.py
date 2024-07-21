@@ -23,6 +23,14 @@ def get_default_config():
                 "path":None, # None means default path for the system
                 "disabled games":["Steam Controller Configs"] # games that aren't shown
             }
+        },
+
+        "controller map": {
+            "left": None,
+            "right": None,
+            "up": None,
+            "down": None,
+            "select": None,
         }
     }
 

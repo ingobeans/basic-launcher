@@ -1,21 +1,11 @@
 let axesThreshold = 0.8;
 let selectionIndex = null;
-let storedControllerMap = localStorage.getItem("controllerMap");
 let windowHasFocus = true;
 
-if (storedControllerMap === null) {
-  localStorage.setItem(
-    "controllerMap",
-    JSON.stringify({
-      left: null,
-      right: null,
-      up: null,
-      down: null,
-      select: null,
-    })
-  );
-}
-let controllerMap = JSON.parse(localStorage.getItem("controllerMap"));
+let controllerMap = {};
+eel.get_controller_map()(function (value) {
+  controllerMap = value;
+});
 
 window.addEventListener("blur", () => {
   windowHasFocus = false;

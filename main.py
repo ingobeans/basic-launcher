@@ -1,4 +1,4 @@
-import eel, sources, shutil, os
+import eel, sources, shutil, os, config
 eel.init('web')
 
 games = []
@@ -19,6 +19,10 @@ def load_illustrations(games):
 
 def game_to_dict(game):
     return {"name":game.name, "source":game.parent_source.name, "id":game.id, "illustration":(f"illustrations/{game.id}.jpg" if game.illustration_path else None)}
+
+@eel.expose
+def get_controller_map():
+    return config.active_config["controller map"]
 
 @eel.expose
 def run_game(id):
