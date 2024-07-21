@@ -14,7 +14,9 @@ eel.get_games()(function (value) {
     };
     if (game["illustration"] !== undefined) {
       let img = document.createElement("img");
-      img.src = game["illustration"];
+      eel.get_illustration_data(game["id"])(function (value) {
+        img.src = value;
+      });
       card.appendChild(img);
     }
     text.innerText = game["name"];

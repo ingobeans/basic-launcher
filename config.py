@@ -3,6 +3,17 @@ import platform, os, json
 def get_system():
     return platform.system()
 
+def get_app_data_directory():
+    system = get_system()
+    if system == "Windows":
+        app_data_dir = os.getenv('APPDATA')
+    elif system == "Darwin":
+        app_data_dir = os.path.expanduser('~/Library/Application Support')
+    else:
+        app_data_dir = os.path.expanduser('~/.config')
+    
+    return os.path.join(app_data_dir, "basic-launcher")
+
 def get_default_config():
     return {
         "disabled sources":[],
@@ -24,18 +35,23 @@ def get_default_config():
     }
 
 def save_config():
-    with open("settings.json", "w", encoding="utf-8") as f:
+    with open(os.path.join(get_app_data_directory(), "settings.json"), "w", encoding="utf-8") as f:
         json.dump(active_config, f)
 
 def load_config():
-    with open("settings.json", "r", encoding="utf-8") as f:
+    with open(os.path.join(get_app_data_directory(), "settings.json"), "r", encoding="utf-8") as f:
         return json.load(f)
-    
-if not os.path.isfile("settings.json"):
+
+def get_illustrations_path():
+    return os.path.join(get_app_data_directory(), "illustrations")
+
+if not os.path.exists(get_app_data_directory()):
+    os.mkdir(get_app_data_directory())
+    os.mkdir(get_illustrations_path())
     active_config = get_default_config()
     save_config()
-    print(f"created settings.json")
+    print(f"created {get_app_data_directory()}")
 else:
-    print(f"loaded settings.json")
+    print(f"data dir {get_app_data_directory()}")
     active_config = load_config()
 print(active_config)
