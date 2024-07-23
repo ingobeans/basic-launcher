@@ -16,21 +16,21 @@ body {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0); 
+    background: rgba(255, 255, 255, 0);
 }
 ::-webkit-scrollbar-thumb {
-    background: var(--contrast-color); 
+    background: var(--contrast-color);
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #454545; 
+    background: #454545;
 }
 
 button {
     width: fit-content;
-    
+
     padding: 10px;
-    font-size:inherit;
+    font-size: inherit;
     color: inherit;
     background-color: var(--contrast-color);
     border-style: none;
@@ -38,7 +38,6 @@ button {
 }
 
 #settings-container {
-    
     display: flex;
     flex-direction: column;
 }
@@ -101,7 +100,7 @@ button {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 49;
 }
 
@@ -140,6 +139,8 @@ button {
     transform: translate(-50%, 0);
     top: calc(225px + 0.5em);
     margin: 0;
+    word-break: break-all;
+    width: 100%;
 }
 
 .game-card img {
