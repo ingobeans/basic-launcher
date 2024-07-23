@@ -68,7 +68,7 @@ def verify_config():
     # make sure no keys included in the default config are missing
     default = get_default_config()
     new = merge_dicts(default, j)
-    if new != data:
+    if new != j:
         print("current config is bad")
         with open(os.path.join(get_app_data_directory(), "settings.json"), "w", encoding="utf-8") as f:
             json.dump(new, f)
