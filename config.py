@@ -55,20 +55,24 @@ def verify_config():
     # this includes fixing invalid json and adding missing keys
     with open(os.path.join(get_app_data_directory(), "settings.json"), "r", encoding="utf-8") as f:
         data = f.read()
+
+    bad = False
     if not data:
         data = "{}"
-
     try:
         j = json.loads(data)
     except ValueError:
         # config json is invalid
         import json_repair
         j = json_repair.repair_json(data, return_objects=True)
+        bad = True
 
     # make sure no keys included in the default config are missing
     default = get_default_config()
     new = merge_dicts(default, j)
     if new != j:
+        bad = True
+    if bad:
         print("current config is bad")
         with open(os.path.join(get_app_data_directory(), "settings.json"), "w", encoding="utf-8") as f:
             json.dump(new, f)
