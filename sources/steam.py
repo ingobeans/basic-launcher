@@ -79,9 +79,11 @@ class Steam(source.Source):
     def run_game(self,id):
         system = config.get_system()
         if system == "Windows":
-            command = ["start", f"steam://rungameid/{id}"]
+            print("wa")
+            command = f"start steam://rungameid/{id}"
         elif system == "Darwin":
-            command = ["open", f"steam://rungameid/{id}"]
+            command = f"open steam://rungameid/{id}"
         else:
-            command = ["steam", f"steam://rungameid/{id}"]
-        subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            command = f"steam steam://rungameid/{id}"
+        
+        subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, shell=True)
