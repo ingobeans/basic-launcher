@@ -52,10 +52,13 @@ class Raw(source.Source):
         for path in games_paths:
             name = os.path.basename(path).split(".")[0]
             game_id = os.path.basename(path)
-            illustration_path = self.get_icon_from_exe(path)
             self.games_registry[game_id] = path
             if path in config.active_config["source settings"]["raw"]["aliases"]:
                 name = config.active_config["source settings"]["raw"]["aliases"][path]
+            if name in self.get_illustration_overrides():
+                illustration_path = None
+            else:
+                illustration_path = self.get_icon_from_exe(path)
             g = game.Game(self,name,game_id,illustration_path)
             games.append(g)
         return games
