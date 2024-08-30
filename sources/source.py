@@ -8,7 +8,13 @@ class Source:
     def __init__(self) -> None:
         self.path = config.active_config["source settings"][self.name]["path"]
         self.disabled_games = config.active_config["source settings"][self.name]["disabled games"]
-    def get_games(self)->list[str]:
+    def get_games(self)->list:
         raise NotImplemented(f"Source {self.name} not implemented")
     def get_disabled_games(self):
-        return config.active_config["source settings"][self.name]["disabled games"]
+        if "disabled games" in config.active_config["source settings"][self.name]:
+            return config.active_config["source settings"][self.name]["disabled games"]
+        return []
+    def get_illustration_overrides(self):
+        if "illustration overrides" in config.active_config["source settings"][self.name]:
+            return config.active_config["source settings"][self.name]["illustration overrides"]
+        return []

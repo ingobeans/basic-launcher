@@ -20,12 +20,15 @@ def get_default_config():
         
         "source settings": {
             "steam":{
-                "path":None, # None means default path for the system
-                "disabled games":["Steamworks Common Redistributables"] # game names that aren't shown
+                "path":None, # None means default path for the system. Path should be a folder containing 'steamapps'
+                "illustration overrides": {}, # Overrides illustration. Key is name (the one displayed), value is path to image
+                "disabled games":["Steamworks Common Redistributables"], # Game names that aren't shown
             },
             "raw":{
                 "paths":[], # Path to raw executables
-                "aliases": {}, # Aliases for executables. Key is the path (should be in paths), value is new title
+                "aliases": {}, # Aliases for executables. Key is the path (should be in paths), value is new name
+                "illustration overrides": {},
+                "disabled games":[],
             }
         },
 
