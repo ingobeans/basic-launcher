@@ -69,6 +69,8 @@ class Steam(source.Source):
             # load the (vdf formatted) manifests 
             with open(os.path.join(apps_path, manifest), "r", encoding="utf-8") as f:
                 data = vdf.load(f)["AppState"]
+            if data["name"] in self.get_disabled_games():
+                continue
             
             g = game.Game(self, data["name"], data["appid"], self.get_game_illustraton_path(data["appid"]))
             games.append(g)
