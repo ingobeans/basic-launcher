@@ -1,5 +1,6 @@
-import eel, sources, os, config, base64
-eel.init('web')
+import eel, sources, os, sys, config, base64
+
+eel.init(os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])),"web"))
 
 games = []
 
@@ -35,4 +36,4 @@ def get_games():
     games = sources.get_games()
     return [game_to_dict(g) for g in games]
 
-eel.start('hello.html', port=5048, size=(1182+15, 660+15))
+eel.start('hello.html', port=5049, size=(1182+15, 660+15))
