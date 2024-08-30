@@ -18,3 +18,7 @@ class Source:
         if "illustration overrides" in config.active_config["source settings"][self.name]:
             return config.active_config["source settings"][self.name]["illustration overrides"]
         return []
+    def get_aliases(self):
+        if "aliases" in config.active_config["source settings"][self.name]:
+            return config.active_config["source settings"][self.name]["aliases"]
+        return []

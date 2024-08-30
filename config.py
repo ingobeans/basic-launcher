@@ -16,18 +16,20 @@ def get_app_data_directory():
 
 def get_default_config():
     return {
+        "sort": "alphabetical", # How to sort games. Options are 'alphabetical', 'source'
         "disabled sources":[],
         
         "source settings": {
             "steam":{
                 "path":None, # None means default path for the system. Path should be a folder containing 'steamapps'
-                "illustration overrides": {}, # Overrides illustration. Key is name (the one displayed), value is path to image
+                "aliases": {}, # Aliases for executables. Key is the default name, value is new name
+                "illustration overrides": {}, # Overrides illustration. Key is display name (the alias if configured, otherwise default), value is path to image
                 "disabled games":["Steamworks Common Redistributables"], # Game names that aren't shown
             },
             "raw":{
                 "paths":[], # Path to raw executables
-                "aliases": {}, # Aliases for executables. Key is the path (should be in paths), value is new name
-                "illustration overrides": {},
+                "aliases": {}, # Aliases for executables. Key is the default name, value is new name
+                "illustration overrides": {}, # Overrides illustration. Key is display name (the alias if configured, otherwise default), value is path to image
                 "disabled games":[],
             }
         },

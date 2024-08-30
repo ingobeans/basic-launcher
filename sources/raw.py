@@ -53,8 +53,6 @@ class Raw(source.Source):
             name = os.path.basename(path).split(".")[0]
             game_id = os.path.basename(path)
             self.games_registry[game_id] = path
-            if path in config.active_config["source settings"]["raw"]["aliases"]:
-                name = config.active_config["source settings"]["raw"]["aliases"][path]
             if name in self.get_illustration_overrides():
                 illustration_path = None
             else:
