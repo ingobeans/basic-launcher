@@ -1,9 +1,9 @@
-import win32api, win32ui, win32com, win32gui, win32con
 import config, os, subprocess
 from . import source
 from . import game
 from PIL import Image
-
+if config.get_system() == "Windows":
+    import win32api, win32ui, win32com, win32gui, win32con
 
 class Raw(source.Source):
     name:str = "raw"
@@ -16,6 +16,8 @@ class Raw(source.Source):
         return os.path.isfile(path)
 
     def get_icon_from_exe(self, path):
+        if config.get_system() != "Windows":
+            return None
         path = path.replace("\\", "/")
         filename = os.path.basename(path)
         icoX = win32api.GetSystemMetrics(win32con.SM_CXICON)
