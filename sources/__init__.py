@@ -2,13 +2,12 @@ import config
 from . import source
 from . import game
 from . import steam
+from . import raw
 
-def load_source(source_class):
-    return source_class(config.active_config["source settings"][source_class.name]["path"], config.active_config["source settings"][source_class.name]["disabled games"])
+source_steam = steam.Steam()
+source_raw = raw.Raw()
 
-source_steam = load_source(steam.Steam)
-
-sources = [source_steam]
+sources = [source_steam,source_raw]
 
 def get_games():
     games = []

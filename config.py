@@ -22,6 +22,10 @@ def get_default_config():
             "steam":{
                 "path":None, # None means default path for the system
                 "disabled games":["Steamworks Common Redistributables"] # game names that aren't shown
+            },
+            "raw":{
+                "paths":[], # Path to raw executables
+                "aliases": {}, # Aliases for executables. Key is the path (should be in paths), value is new title
             }
         },
 
@@ -44,7 +48,7 @@ def merge_dicts(a, b):
 
 def save_config():
     with open(os.path.join(get_app_data_directory(), "settings.json"), "w", encoding="utf-8") as f:
-        json.dump(active_config, f)
+        json.dump(active_config, f, indent=4)
 
 def load_config():
     with open(os.path.join(get_app_data_directory(), "settings.json"), "r", encoding="utf-8") as f:
@@ -75,7 +79,7 @@ def verify_config():
     if bad:
         print("current config is bad")
         with open(os.path.join(get_app_data_directory(), "settings.json"), "w", encoding="utf-8") as f:
-            json.dump(new, f)
+            json.dump(new, f, indent=4)
 
 if not os.path.exists(get_app_data_directory()):
     os.mkdir(get_app_data_directory())
