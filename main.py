@@ -35,4 +35,4 @@ def get_games():
     games = sources.get_games()
     return [game_to_dict(g) for g in games]
 
-eel.start('hello.html', port=5048)
+eel.start('hello.html', port=5048, size=(1182+15, 660+15))
