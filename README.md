@@ -2,6 +2,8 @@
 
 ![Showcase of basic-launcher](https://github.com/ingobeans/basic-launcher/blob/main/example.png?raw=true)
 
+A game launcher that imports games from Steam and/or as raw executables. Can be navigated with either the keyboard, mouse or a gamepad. Allows configuration of game art, game titles, and hidden games.
+
 ### Setup instructions
 
 1. **(Optional) Set up virtual environment. This makes building easier.**
