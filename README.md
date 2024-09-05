@@ -1,6 +1,6 @@
 # Basic Launcher
 
-![Showcase of basic-launcher](https://github.com/ingobeans/basic-launcher/blob/master/example.png?raw=true)
+![Showcase of basic-launcher](https://github.com/ingobeans/basic-launcher/blob/main/example.png?raw=true)
 
 ### Setup instructions
 
