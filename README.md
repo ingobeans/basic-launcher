@@ -1,5 +1,7 @@
 # Basic Launcher
 
+![Showcase of basic-launcher](https://github.com/ingobeans/basic-launcher/blob/master/example.png?raw=true)
+
 ### Setup instructions
 
 1. **(Optional) Set up virtual environment. This makes building easier.**
