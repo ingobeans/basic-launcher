@@ -65,4 +65,4 @@ class Raw(source.Source):
         system = config.get_system()
         path = self.games_registry[id]
         
-        subprocess.Popen([path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen([path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=os.path.dirname(path))
