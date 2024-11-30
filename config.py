@@ -32,14 +32,6 @@ def get_default_config():
                 "illustration overrides": {}, # Overrides illustration. Key is display name (the alias if configured, otherwise default), value is path to image
                 "disabled games":[],
             }
-        },
-
-        "controller map": {
-            "left": None,
-            "right": None,
-            "up": None,
-            "down": None,
-            "select": None,
         }
     }
 

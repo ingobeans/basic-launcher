@@ -2,11 +2,6 @@ let axesThreshold = 0.8;
 let selectionIndex = null;
 let windowHasFocus = true;
 
-let controllerMap = {};
-eel.get_controller_map()(function (value) {
-  controllerMap = value;
-});
-
 window.addEventListener("blur", () => {
   windowHasFocus = false;
 });
@@ -81,26 +76,10 @@ function clickGame(gameElement) {
 function handleButtons(buttons, previousButtonStates) {
   buttons.forEach((button, i) => {
     // only care about the button if it is mapped to an action
-    if (Object.values(controllerMap).includes(i)) {
-      if (button.pressed === true && previousButtonStates[i] !== true) {
-        if (controllerMap["left"] == i) {
-          moveLeft();
-        }
-        if (controllerMap["right"] == i) {
-          moveRight();
-        }
-        if (controllerMap["up"] == i) {
-          moveUp();
-        }
-        if (controllerMap["down"] == i) {
-          moveDown();
-        }
-        if (controllerMap["select"] == i) {
-          selectGame(selectionIndex);
-        }
-      }
-      previousButtonStates[i] = button.pressed;
+    if (button.pressed === true && previousButtonStates[i] !== true) {
+      selectGame(selectionIndex);
     }
+    previousButtonStates[i] = button.pressed;
   });
 }
 

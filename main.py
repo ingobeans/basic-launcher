@@ -21,10 +21,6 @@ def get_illustration_data(game_id):
     return f"data:image/jpeg;base64,{base64_data}"
 
 @eel.expose
-def get_controller_map():
-    return config.active_config["controller map"]
-
-@eel.expose
 def run_game(id):
     print(id)
     game = [g for g in games if g.id == str(id)][0]
