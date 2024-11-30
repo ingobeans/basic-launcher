@@ -1,6 +1,6 @@
 import eel, sources, os, sys, config, base64
 
-eel.init(os.path.join(os.path.dirname(os.path.realpath(sys.argv[0])),"web"))
+eel.init("web")
 
 games = []
 
